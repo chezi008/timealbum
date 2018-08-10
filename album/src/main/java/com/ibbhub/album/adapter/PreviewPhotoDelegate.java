@@ -2,17 +2,15 @@ package com.ibbhub.album.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
+import com.github.chrisbanes.photoview.PhotoView;
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
 import com.ibbhub.album.AlbumHelper;
 import com.ibbhub.album.R;
 import com.ibbhub.album.bean.MediaBean;
-import com.ibbhub.album.photo.PhotoView;
 import com.ibbhub.album.util.FileUtils;
 
 import java.util.List;
@@ -49,7 +47,6 @@ public class PreviewPhotoDelegate extends AdapterDelegate<List<MediaBean>> {
         public PreviewPhotoHolder(View itemView) {
             super(itemView);
             ptView = itemView.findViewById(R.id.ptView);
-            ptView.enable();
         }
     }
 }
