@@ -17,7 +17,7 @@ import java.util.List;
 public class TaHelper {
 
     private List<File> srcFiles = new ArrayList<>();
-    private LoadImageListener loadImageListener;
+    private TimeAlbumListener timeAlbumListener;
     private AdapterListener<AlbumBean> adapterListener;
 
     private TaHelper() {
@@ -47,14 +47,20 @@ public class TaHelper {
     }
 
     public void loadThumbImage(String path, ImageView iv) {
-        if (loadImageListener != null) {
-            loadImageListener.loadThumbImage(path, iv);
+        if (timeAlbumListener != null) {
+            timeAlbumListener.loadOverrideImage(path, iv);
         }
     }
 
     public void loadImage(String path, ImageView iv) {
-        if (loadImageListener != null) {
-            loadImageListener.loadImage(path, iv);
+        if (timeAlbumListener != null) {
+            timeAlbumListener.loadImage(path, iv);
+        }
+    }
+
+    public void onChooseModeChange(boolean isChoose) {
+        if (timeAlbumListener != null) {
+            timeAlbumListener.onChooseModeChange(isChoose);
         }
     }
 
@@ -66,10 +72,29 @@ public class TaHelper {
         static final TaHelper instance = new TaHelper();
     }
 
-    public interface LoadImageListener {
-        void loadThumbImage(String path, ImageView iv);
+    public interface TimeAlbumListener {
+        /**
+         * 加载图片，覆盖原来图片的大小
+         *
+         * @param path
+         * @param iv
+         */
+        void loadOverrideImage(String path, ImageView iv);
 
+        /**
+         * 加载图片
+         *
+         * @param path
+         * @param iv
+         */
         void loadImage(String path, ImageView iv);
+
+        /**
+         * 选择模式改变
+         *
+         * @param isChoose
+         */
+        void onChooseModeChange(boolean isChoose);
     }
 
     public static class Builder {
@@ -86,6 +111,7 @@ public class TaHelper {
          * @return
          */
         public Builder setSrcFiles(File... mediaFile) {
+            helper.srcFiles.clear();
             for (File file :
                     mediaFile) {
                 helper.srcFiles.add(file);
@@ -93,8 +119,8 @@ public class TaHelper {
             return this;
         }
 
-        public Builder setLoadImageListener(LoadImageListener listener) {
-            helper.loadImageListener = listener;
+        public Builder setLoadImageListener(TimeAlbumListener listener) {
+            helper.timeAlbumListener = listener;
             return this;
         }
 

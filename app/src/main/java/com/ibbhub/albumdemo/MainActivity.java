@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -36,14 +40,39 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private MenuItem chooseMenu;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        chooseMenu = menu.findItem(R.id.action_choose);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_choose) {
+            if (item.getTitle().equals("选择")) {
+                albumFragment.enterChoose();
+            } else {
+                albumFragment.cancelChoose();
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private AlbumFragment albumFragment;
+
     private void initView() {
-        AlbumFragment albumFragment = (AlbumFragment) getSupportFragmentManager().findFragmentByTag("album");
+        Toolbar toolbar = findViewById(R.id.toolBar);
+        setSupportActionBar(toolbar);
+        albumFragment = (AlbumFragment) getSupportFragmentManager().findFragmentByTag("album");
         if (albumFragment == null) {
             albumFragment = new TaHelper.Builder()
                     .setSrcFiles(new File(path))
-                    .setLoadImageListener(new TaHelper.LoadImageListener() {
+                    .setLoadImageListener(new TaHelper.TimeAlbumListener() {
                         @Override
-                        public void loadThumbImage(String path, ImageView iv) {
+                        public void loadOverrideImage(String path, ImageView iv) {
                             Glide.with(iv)
                                     .load(path)
                                     .thumbnail(0.1f)
@@ -58,12 +87,17 @@ public class MainActivity extends AppCompatActivity {
                                     .thumbnail(0.1f)
                                     .into(iv);
                         }
+
+                        @Override
+                        public void onChooseModeChange(boolean isChoose) {
+                            chooseMenu.setTitle(isChoose ? "取消" : "选择");
+                        }
                     })
                     .create();
 
         }
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.clParent, albumFragment);
+        ft.replace(R.id.flParent, albumFragment);
         ft.commit();
     }
 

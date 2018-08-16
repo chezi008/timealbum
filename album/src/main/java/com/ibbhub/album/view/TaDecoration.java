@@ -33,7 +33,7 @@ public class TaDecoration implements ITaDecoration {
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.leftMargin = lPadding;
+        params.leftMargin = tPadding;
         llParent.addView(mTvDate);
         llParent.addView(mTvNum, params);
 

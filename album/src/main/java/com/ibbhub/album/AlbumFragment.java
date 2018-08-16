@@ -139,11 +139,10 @@ public class AlbumFragment extends Fragment {
             @Override
             public void onItemLongClick(AlbumBean albumBean, View v) {
                 //进入选择模式
-                isChooseMode = true;
-                mAdapter.notifyDataSetChanged();
-                album_menu.setVisibility(View.VISIBLE);
+                enterChoose();
             }
         });
+
 
         List<File> fileList = TaHelper.getInstance().getSrcFiles();
         Observable.fromIterable(fileList)
@@ -247,7 +246,7 @@ public class AlbumFragment extends Fragment {
                     uriList.add(Uri.fromFile(new File(mb.path)));
                 }
             }
-            TaShareManager.getInstance().openShare(getContext(),uriList);
+            TaShareManager.getInstance().openShare(getContext(), uriList);
         }
         resetRecycler();
     }
@@ -261,6 +260,25 @@ public class AlbumFragment extends Fragment {
         }
         choosedCache.clear();
         isChooseMode = false;
+        TaHelper.getInstance().onChooseModeChange(isChooseMode);
         mAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * 取消选择
+     */
+    public void cancelChoose() {
+        resetRecycler();
+        album_menu.setVisibility(View.GONE);
+    }
+
+    /**
+     * 进入选择
+     */
+    public void enterChoose() {
+        isChooseMode = true;
+        TaHelper.getInstance().onChooseModeChange(isChooseMode);
+        mAdapter.notifyDataSetChanged();
+        album_menu.setVisibility(View.VISIBLE);
     }
 }
