@@ -11,7 +11,7 @@ import android.widget.ImageView;
 
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
-import com.ibbhub.album.AlbumHelper;
+import com.ibbhub.album.TaHelper;
 import com.ibbhub.album.R;
 import com.ibbhub.album.bean.AlbumBean;
 import com.ibbhub.album.util.FileUtils;
@@ -47,7 +47,7 @@ public class PreviewVideoDelegate extends AdapterDelegate<List<AlbumBean>> {
         pHolder.vp.setTitle(FileUtils.obtainFileName(mb.path));
         //thumb
         pHolder.vp.getPreviewImage().setScaleType(ImageView.ScaleType.FIT_CENTER);
-        AlbumHelper.getInstance().loadImage(mb.path, pHolder.vp.getPreviewImage());
+        TaHelper.getInstance().loadImage(mb.path, pHolder.vp.getPreviewImage());
 
         pHolder.mp.setTag(position);
         pHolder.mp.setPlayUri(mb.path);

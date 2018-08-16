@@ -12,12 +12,12 @@ import java.util.ArrayList;
  * @description ：The share manager of album
  * @email ：chezi008@163.com
  */
-public class TbShareManager {
-    private TbShareManager() {
+public class TaShareManager {
+    private TaShareManager() {
 
     }
 
-    public static TbShareManager getInstance() {
+    public static TaShareManager getInstance() {
         return ALShareManagerHolder.instance;
     }
 
@@ -50,6 +50,6 @@ public class TbShareManager {
     }
 
     private static class ALShareManagerHolder {
-        static final TbShareManager instance = new TbShareManager();
+        static final TaShareManager instance = new TaShareManager();
     }
 }

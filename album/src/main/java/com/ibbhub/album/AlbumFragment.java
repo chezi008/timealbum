@@ -99,7 +99,7 @@ public class AlbumFragment extends Fragment {
 
     private void initData() {
 
-        AlbumHelper.getInstance().setAdapterListener(new AdapterListener<AlbumBean>() {
+        TaHelper.getInstance().setAdapterListener(new AdapterListener<AlbumBean>() {
             @Override
             public void onItemClick(AlbumBean albumBean, View v) {
                 TimeBean timeBean = new TimeBean();
@@ -145,7 +145,7 @@ public class AlbumFragment extends Fragment {
             }
         });
 
-        List<File> fileList = AlbumHelper.getInstance().getSrcFiles();
+        List<File> fileList = TaHelper.getInstance().getSrcFiles();
         Observable.fromIterable(fileList)
                 .flatMapIterable(new Function<File, Iterable<File>>() {
                     @Override
@@ -237,7 +237,7 @@ public class AlbumFragment extends Fragment {
         if (choosedCache.size() == 1 && choosedCache.get(0).itemList.size() == 1) {
             //单张
             AlbumBean albumBean = choosedCache.get(0).itemList.get(0);
-            TbShareManager.getInstance().openShare(getContext(), albumBean.path);
+            TaShareManager.getInstance().openShare(getContext(), albumBean.path);
         } else {
             //多张
             ArrayList<Uri> uriList = new ArrayList<>();
@@ -247,7 +247,7 @@ public class AlbumFragment extends Fragment {
                     uriList.add(Uri.fromFile(new File(mb.path)));
                 }
             }
-            TbShareManager.getInstance().openShare(getContext(),uriList);
+            TaShareManager.getInstance().openShare(getContext(),uriList);
         }
         resetRecycler();
     }

@@ -28,7 +28,7 @@ public class AlbumPreviewFragment extends Fragment {
 
     private List<AlbumBean> mData;
     private PreviewAdappter mAdappter;
-    private TbPagerHelper tbPagerHelper = new TbPagerHelper();
+    private TaPagerHelper taPagerHelper = new TaPagerHelper();
 
     private int position;
 
@@ -56,7 +56,7 @@ public class AlbumPreviewFragment extends Fragment {
 
             @Override
             public void onShareClick() {
-                TbShareManager.getInstance().openShare(getContext(), mData.get(position).path);
+                TaShareManager.getInstance().openShare(getContext(), mData.get(position).path);
             }
         });
 
@@ -67,13 +67,13 @@ public class AlbumPreviewFragment extends Fragment {
         rcList.setAdapter(mAdappter);
         rcList.scrollToPosition(position);
 
-        tbPagerHelper.setListener(new TbPagerHelper.PageHelperListener() {
+        taPagerHelper.setListener(new TaPagerHelper.PageHelperListener() {
             @Override
             public void onPageChanged(int position) {
                 //设置标题
                 AlbumPreviewFragment.this.position = position;
             }
         });
-        tbPagerHelper.attachToRecyclerView(rcList);
+        taPagerHelper.attachToRecyclerView(rcList);
     }
 }

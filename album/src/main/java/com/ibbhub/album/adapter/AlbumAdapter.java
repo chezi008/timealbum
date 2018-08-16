@@ -10,10 +10,10 @@ import java.util.List;
  * @description ：
  * @email ：chezi008@163.com
  */
-public class MediaAdapter extends ListDelegationAdapter<List<AlbumBean>> {
+public class AlbumAdapter extends ListDelegationAdapter<List<AlbumBean>> {
 
-    public MediaAdapter(List<AlbumBean> data) {
-        delegatesManager.addDelegate(new MediaDelegate());
+    public AlbumAdapter(List<AlbumBean> data) {
+        delegatesManager.addDelegate(new AlbumDelegate());
         setItems(data);
     }
 

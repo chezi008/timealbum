@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.github.chrisbanes.photoview.PhotoView;
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
-import com.ibbhub.album.AlbumHelper;
+import com.ibbhub.album.TaHelper;
 import com.ibbhub.album.R;
 import com.ibbhub.album.bean.AlbumBean;
 import com.ibbhub.album.util.FileUtils;
@@ -38,7 +38,7 @@ public class PreviewPhotoDelegate extends AdapterDelegate<List<AlbumBean>> {
     protected void onBindViewHolder(@NonNull List<AlbumBean> items, int position, @NonNull RecyclerView.ViewHolder holder, @NonNull List<Object> payloads) {
         AlbumBean mb = items.get(position);
 //        Log.d(TAG, "onBindViewHolder: "+mb.path);
-        AlbumHelper.getInstance().loadImage(mb.path, ((PreviewPhotoHolder) holder).ptView);
+        TaHelper.getInstance().loadImage(mb.path, ((PreviewPhotoHolder) holder).ptView);
     }
 
     static class PreviewPhotoHolder extends RecyclerView.ViewHolder {

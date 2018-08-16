@@ -11,7 +11,7 @@ import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.ibbhub.album.AlbumHelper;
+import com.ibbhub.album.TaHelper;
 import com.ibbhub.album.R;
 
 /**
@@ -19,7 +19,7 @@ import com.ibbhub.album.R;
  * @description ：the view of photo or video
  * @email ：chezi008@163.com
  */
-public class AlbumView extends FrameLayout {
+public class TaAlbumView extends FrameLayout {
 
     public static final int STYLE_PHOTO = 0;
     public static final int STYLE_VIDEO = 1;
@@ -28,11 +28,11 @@ public class AlbumView extends FrameLayout {
     private CheckBox cb_check;
     private View v_mask;
 
-    public AlbumView(@NonNull Context context) {
+    public TaAlbumView(@NonNull Context context) {
         this(context, null);
     }
 
-    public AlbumView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public TaAlbumView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.item_media, this);
         initView();
@@ -78,7 +78,7 @@ public class AlbumView extends FrameLayout {
     }
 
     public void loadImage(String path) {
-        AlbumHelper.getInstance().loadThumbImage(path, iv_thumb);
+        TaHelper.getInstance().loadThumbImage(path, iv_thumb);
     }
 
     @Override
