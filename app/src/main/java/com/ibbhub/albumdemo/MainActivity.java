@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.ibbhub.album.AlbumApplication;
+import com.ibbhub.album.TbApplication;
 import com.ibbhub.album.AlbumFragment;
 import com.ibbhub.album.AlbumHelper;
 import com.yanzhenjie.permission.Action;
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initVariable() {
-        AlbumApplication
+        TbApplication
                 .init()
                 .setSrcFiles(new File(path))
                 .setLoadImageListener(new AlbumHelper.LoadImageListener() {

@@ -19,7 +19,7 @@ import com.ibbhub.album.R;
  * @description ：the view of photo or video
  * @email ：chezi008@163.com
  */
-public class MediaView extends FrameLayout {
+public class AlbumView extends FrameLayout {
 
     public static final int STYLE_PHOTO = 0;
     public static final int STYLE_VIDEO = 1;
@@ -28,11 +28,11 @@ public class MediaView extends FrameLayout {
     private CheckBox cb_check;
     private View v_mask;
 
-    public MediaView(@NonNull Context context) {
+    public AlbumView(@NonNull Context context) {
         this(context, null);
     }
 
-    public MediaView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public AlbumView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.item_media, this);
         initView();

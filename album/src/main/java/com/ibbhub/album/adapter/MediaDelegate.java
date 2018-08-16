@@ -10,9 +10,8 @@ import com.ibbhub.album.AdapterListener;
 import com.ibbhub.album.AlbumFragment;
 import com.ibbhub.album.AlbumHelper;
 import com.ibbhub.album.bean.AlbumBean;
-import com.ibbhub.album.bean.MediaBean;
 import com.ibbhub.album.util.FileUtils;
-import com.ibbhub.album.view.MediaView;
+import com.ibbhub.album.view.AlbumView;
 
 import java.util.List;
 
@@ -21,11 +20,11 @@ import java.util.List;
  * @description ：
  * @email ：chezi008@163.com
  */
-public class MediaDelegate extends AdapterDelegate<List<MediaBean>> {
+public class MediaDelegate extends AdapterDelegate<List<AlbumBean>> {
 
-    private AdapterListener<MediaBean> listener;
+    private AdapterListener<AlbumBean> listener;
     @Override
-    protected boolean isForViewType(@NonNull List<MediaBean> items, int position) {
+    protected boolean isForViewType(@NonNull List<AlbumBean> items, int position) {
         return true;
     }
 
@@ -33,28 +32,28 @@ public class MediaDelegate extends AdapterDelegate<List<MediaBean>> {
     @Override
     protected RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent) {
         listener = AlbumHelper.getInstance().getAdapterListener();
-        return new MediaDelegateHolder(new MediaView(parent.getContext()));
+        return new MediaDelegateHolder(new AlbumView(parent.getContext()));
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull final List<MediaBean> items, final int position, @NonNull RecyclerView.ViewHolder holder, @NonNull List<Object> payloads) {
-        final MediaBean mediaBean = items.get(position);
+    protected void onBindViewHolder(@NonNull final List<AlbumBean> items, final int position, @NonNull RecyclerView.ViewHolder holder, @NonNull List<Object> payloads) {
+        final AlbumBean albumBean = items.get(position);
         final MediaDelegateHolder mediaHolder = (MediaDelegateHolder) holder;
-        mediaHolder.mediaView.loadImage(mediaBean.path);
+        mediaHolder.albumView.loadImage(albumBean.path);
         //判断类型
-        boolean isImage = FileUtils.isImageFile(mediaBean.path);
-        mediaHolder.mediaView.setStyle(isImage ? MediaView.STYLE_PHOTO : MediaView.STYLE_VIDEO);
-        mediaHolder.mediaView.setChooseStyle(AlbumFragment.isChooseMode);
-        mediaHolder.mediaView.setChecked(mediaBean.isChecked);
+        boolean isImage = FileUtils.isImageFile(albumBean.path);
+        mediaHolder.albumView.setStyle(isImage ? AlbumView.STYLE_PHOTO : AlbumView.STYLE_VIDEO);
+        mediaHolder.albumView.setChooseStyle(AlbumFragment.isChooseMode);
+        mediaHolder.albumView.setChecked(albumBean.isChecked);
         mediaHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (AlbumFragment.isChooseMode) {
-                    mediaBean.setChecked(!mediaBean.isChecked);
-                    mediaHolder.mediaView.setChecked(mediaBean.isChecked);
+                    albumBean.setChecked(!albumBean.isChecked);
+                    mediaHolder.albumView.setChecked(albumBean.isChecked);
                 }
                 if (listener != null) {
-                    listener.onItemClick(mediaBean, v);
+                    listener.onItemClick(albumBean, v);
                 }
             }
         });
@@ -64,7 +63,7 @@ public class MediaDelegate extends AdapterDelegate<List<MediaBean>> {
                 if (AlbumFragment.isChooseMode) {
                     return false;
                 }
-                if (listener != null && !mediaHolder.mediaView.isCheckMode()) {
+                if (listener != null && !mediaHolder.albumView.isCheckMode()) {
                     listener.onItemLongClick(items.get(position), v);
                 }
                 return true;
@@ -73,11 +72,11 @@ public class MediaDelegate extends AdapterDelegate<List<MediaBean>> {
     }
 
     public class MediaDelegateHolder extends RecyclerView.ViewHolder {
-        MediaView mediaView;
+        AlbumView albumView;
 
-        public MediaDelegateHolder(MediaView itemView) {
+        public MediaDelegateHolder(AlbumView itemView) {
             super(itemView);
-            this.mediaView = itemView;
+            this.albumView = itemView;
         }
     }
 }

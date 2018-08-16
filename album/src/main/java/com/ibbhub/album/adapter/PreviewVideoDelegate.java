@@ -13,7 +13,7 @@ import com.google.android.exoplayer2.ExoPlaybackException;
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
 import com.ibbhub.album.AlbumHelper;
 import com.ibbhub.album.R;
-import com.ibbhub.album.bean.MediaBean;
+import com.ibbhub.album.bean.AlbumBean;
 import com.ibbhub.album.util.FileUtils;
 
 import java.util.List;
@@ -27,9 +27,9 @@ import chuangyuan.ycj.videolibrary.widget.VideoPlayerView;
  * @description ：
  * @email ：chezi008@163.com
  */
-public class PreviewVideoDelegate extends AdapterDelegate<List<MediaBean>> {
+public class PreviewVideoDelegate extends AdapterDelegate<List<AlbumBean>> {
     @Override
-    protected boolean isForViewType(@NonNull List<MediaBean> items, int position) {
+    protected boolean isForViewType(@NonNull List<AlbumBean> items, int position) {
         return items.get(position).path.endsWith(".mp4");
     }
 
@@ -41,9 +41,9 @@ public class PreviewVideoDelegate extends AdapterDelegate<List<MediaBean>> {
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull List<MediaBean> items, int position, @NonNull RecyclerView.ViewHolder holder, @NonNull List<Object> payloads) {
+    protected void onBindViewHolder(@NonNull List<AlbumBean> items, int position, @NonNull RecyclerView.ViewHolder holder, @NonNull List<Object> payloads) {
         final PreviewVideoHolder pHolder = (PreviewVideoHolder) holder;
-        MediaBean mb = items.get(position);
+        AlbumBean mb = items.get(position);
         pHolder.vp.setTitle(FileUtils.obtainFileName(mb.path));
         //thumb
         pHolder.vp.getPreviewImage().setScaleType(ImageView.ScaleType.FIT_CENTER);

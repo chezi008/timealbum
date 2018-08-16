@@ -6,10 +6,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.ibbhub.album.bean.MediaBean;
+import com.ibbhub.album.bean.AlbumBean;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author ：chezi008 on 2018/8/9 21:40
@@ -27,7 +26,7 @@ public class AlbumPreviewActivity extends AppCompatActivity {
             fragment = new AlbumPreviewFragment();
         }
 
-        ArrayList<MediaBean> data = getIntent().getParcelableArrayListExtra("data");
+        ArrayList<AlbumBean> data = getIntent().getParcelableArrayListExtra("data");
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("data", data);
         bundle.putInt("pos", getIntent().getIntExtra("pos", 0));
@@ -37,7 +36,7 @@ public class AlbumPreviewActivity extends AppCompatActivity {
         ft.commit();
     }
 
-    public static void start(Context context, ArrayList<MediaBean> data, int pos) {
+    public static void start(Context context, ArrayList<AlbumBean> data, int pos) {
         Intent starter = new Intent(context, AlbumPreviewActivity.class);
         starter.putParcelableArrayListExtra("data", data);
         starter.putExtra("pos", pos);

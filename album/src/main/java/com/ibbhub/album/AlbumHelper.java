@@ -2,7 +2,7 @@ package com.ibbhub.album;
 
 import android.widget.ImageView;
 
-import com.ibbhub.album.bean.MediaBean;
+import com.ibbhub.album.bean.AlbumBean;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class AlbumHelper {
 
     private List<File> srcFiles = new ArrayList<>();
     private LoadImageListener loadImageListener;
-    private AdapterListener<MediaBean> adapterListener;
+    private AdapterListener<AlbumBean> adapterListener;
 
     private AlbumHelper() {
 
@@ -43,11 +43,11 @@ public class AlbumHelper {
         return this;
     }
 
-    public void setAdapterListener(AdapterListener<MediaBean> adapterListener) {
+    public void setAdapterListener(AdapterListener<AlbumBean> adapterListener) {
         this.adapterListener = adapterListener;
     }
 
-    public AdapterListener<MediaBean> getAdapterListener() {
+    public AdapterListener<AlbumBean> getAdapterListener() {
         return adapterListener;
     }
 

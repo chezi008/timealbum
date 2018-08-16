@@ -10,7 +10,7 @@ import com.github.chrisbanes.photoview.PhotoView;
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
 import com.ibbhub.album.AlbumHelper;
 import com.ibbhub.album.R;
-import com.ibbhub.album.bean.MediaBean;
+import com.ibbhub.album.bean.AlbumBean;
 import com.ibbhub.album.util.FileUtils;
 
 import java.util.List;
@@ -20,10 +20,10 @@ import java.util.List;
  * @description ：
  * @email ：chezi008@163.com
  */
-public class PreviewPhotoDelegate extends AdapterDelegate<List<MediaBean>> {
+public class PreviewPhotoDelegate extends AdapterDelegate<List<AlbumBean>> {
     private String TAG = getClass().getSimpleName();
     @Override
-    protected boolean isForViewType(@NonNull List<MediaBean> items, int position) {
+    protected boolean isForViewType(@NonNull List<AlbumBean> items, int position) {
         return FileUtils.isImageFile(items.get(position).path);
     }
 
@@ -35,8 +35,8 @@ public class PreviewPhotoDelegate extends AdapterDelegate<List<MediaBean>> {
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull List<MediaBean> items, int position, @NonNull RecyclerView.ViewHolder holder, @NonNull List<Object> payloads) {
-        MediaBean mb = items.get(position);
+    protected void onBindViewHolder(@NonNull List<AlbumBean> items, int position, @NonNull RecyclerView.ViewHolder holder, @NonNull List<Object> payloads) {
+        AlbumBean mb = items.get(position);
 //        Log.d(TAG, "onBindViewHolder: "+mb.path);
         AlbumHelper.getInstance().loadImage(mb.path, ((PreviewPhotoHolder) holder).ptView);
     }

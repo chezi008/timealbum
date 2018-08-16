@@ -5,7 +5,7 @@ package com.ibbhub.album;
  * @description ：
  * @email ：chezi008@163.com
  */
-public class AlbumApplication {
+public class TbApplication {
 
     public static AlbumHelper init() {
         return AlbumHelper.getInstance();

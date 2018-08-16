@@ -1,7 +1,7 @@
 package com.ibbhub.album.adapter;
 
 import com.hannesdorfmann.adapterdelegates3.ListDelegationAdapter;
-import com.ibbhub.album.bean.MediaBean;
+import com.ibbhub.album.bean.AlbumBean;
 
 import java.util.List;
 
@@ -10,9 +10,9 @@ import java.util.List;
  * @description ：
  * @email ：chezi008@163.com
  */
-public class PreviewAdappter extends ListDelegationAdapter<List<MediaBean>> {
+public class PreviewAdappter extends ListDelegationAdapter<List<AlbumBean>> {
 
-    public PreviewAdappter(List<MediaBean> data) {
+    public PreviewAdappter(List<AlbumBean> data) {
         delegatesManager.addDelegate(new PreviewPhotoDelegate());
         delegatesManager.addDelegate(new PreviewVideoDelegate());
         setItems(data);

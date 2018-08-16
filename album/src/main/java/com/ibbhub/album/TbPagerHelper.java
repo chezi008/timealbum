@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
  * @description ：
  * @email ：chezi008@163.com
  */
-public class RcPagerHelper extends PagerSnapHelper {
+public class TbPagerHelper extends PagerSnapHelper {
     private PageHelperListener listener;
 
     @Override

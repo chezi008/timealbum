@@ -11,10 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ibbhub.album.adapter.PreviewAdappter;
-import com.ibbhub.album.bean.MediaBean;
+import com.ibbhub.album.bean.AlbumBean;
 import com.ibbhub.album.view.AlbumBottomMenu;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,9 +26,9 @@ public class AlbumPreviewFragment extends Fragment {
     private RecyclerView rcList;
     private AlbumBottomMenu abMenu;
 
-    private List<MediaBean> mData;
+    private List<AlbumBean> mData;
     private PreviewAdappter mAdappter;
-    private RcPagerHelper rcPagerHelper = new RcPagerHelper();
+    private TbPagerHelper tbPagerHelper = new TbPagerHelper();
 
     private int position;
 
@@ -57,7 +56,7 @@ public class AlbumPreviewFragment extends Fragment {
 
             @Override
             public void onShareClick() {
-                ALShareManager.getInstance().openShare(getContext(), mData.get(position).path);
+                TbShareManager.getInstance().openShare(getContext(), mData.get(position).path);
             }
         });
 
@@ -68,13 +67,13 @@ public class AlbumPreviewFragment extends Fragment {
         rcList.setAdapter(mAdappter);
         rcList.scrollToPosition(position);
 
-        rcPagerHelper.setListener(new RcPagerHelper.PageHelperListener() {
+        tbPagerHelper.setListener(new TbPagerHelper.PageHelperListener() {
             @Override
             public void onPageChanged(int position) {
                 //设置标题
                 AlbumPreviewFragment.this.position = position;
             }
         });
-        rcPagerHelper.attachToRecyclerView(rcList);
+        tbPagerHelper.attachToRecyclerView(rcList);
     }
 }

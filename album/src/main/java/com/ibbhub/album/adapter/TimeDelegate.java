@@ -8,9 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
-import com.ibbhub.album.AdapterListener;
-import com.ibbhub.album.AlbumPreviewActivity;
-import com.ibbhub.album.bean.AlbumBean;
+import com.ibbhub.album.bean.TimeBean;
 import com.ibbhub.album.R;
 import com.ibbhub.album.view.GridDecoration;
 
@@ -23,12 +21,12 @@ import java.util.List;
  * @description ：
  * @email ：chezi008@163.com
  */
-public class AlbumDelegate extends AdapterDelegate<List<AlbumBean>> {
+public class TimeDelegate extends AdapterDelegate<List<TimeBean>> {
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
-    protected boolean isForViewType(@NonNull List<AlbumBean> items, int position) {
+    protected boolean isForViewType(@NonNull List<TimeBean> items, int position) {
         return true;
     }
 
@@ -42,7 +40,7 @@ public class AlbumDelegate extends AdapterDelegate<List<AlbumBean>> {
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull final List<AlbumBean> items, final int position, @NonNull RecyclerView.ViewHolder holder, @NonNull List<Object> payloads) {
+    protected void onBindViewHolder(@NonNull final List<TimeBean> items, final int position, @NonNull RecyclerView.ViewHolder holder, @NonNull List<Object> payloads) {
         AlbumDelegateHolder albumHolder = (AlbumDelegateHolder) holder;
         String date = dateFormat.format(new Date(items.get(position).date));
         albumHolder.tv_date.setText(date);

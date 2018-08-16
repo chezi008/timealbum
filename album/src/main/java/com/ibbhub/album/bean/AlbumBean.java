@@ -3,31 +3,24 @@ package com.ibbhub.album.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * @author ：chezi008 on 2018/8/1 22:58
+ * @author ：chezi008 on 2018/8/1 23:15
  * @description ：
  * @email ：chezi008@163.com
  */
 public class AlbumBean implements Parcelable {
+    public String path;
     public long date;
-    public List<MediaBean> itemList = new ArrayList<>();
+    public boolean isChecked;
 
     public AlbumBean() {
 
     }
 
     protected AlbumBean(Parcel in) {
+        path = in.readString();
         date = in.readLong();
-        itemList = in.createTypedArrayList(MediaBean.CREATOR);
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(date);
-        dest.writeTypedList(itemList);
+        isChecked = in.readByte() != 0;
     }
 
     public static final Creator<AlbumBean> CREATOR = new Creator<AlbumBean>() {
@@ -42,9 +35,12 @@ public class AlbumBean implements Parcelable {
         }
     };
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public long getDate() {
@@ -55,20 +51,23 @@ public class AlbumBean implements Parcelable {
         this.date = date;
     }
 
-    public List<MediaBean> getItemList() {
-        return itemList;
+    public boolean isChecked() {
+        return isChecked;
     }
 
-    public void setItemList(List<MediaBean> itemList) {
-        this.itemList = itemList;
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof AlbumBean) {
-            AlbumBean ab = (AlbumBean) obj;
-            return this.date == ab.date;
-        }
-        return super.equals(obj);
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(path);
+        dest.writeLong(date);
+        dest.writeByte((byte) (isChecked ? 1 : 0));
     }
 }

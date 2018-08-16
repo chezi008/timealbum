@@ -1,6 +1,5 @@
 package com.ibbhub.album;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,9 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.ibbhub.album.adapter.AlbumAdapter;
+import com.ibbhub.album.adapter.TimeAdapter;
+import com.ibbhub.album.bean.TimeBean;
 import com.ibbhub.album.bean.AlbumBean;
-import com.ibbhub.album.bean.MediaBean;
 import com.ibbhub.album.util.FileUtils;
 import com.ibbhub.album.view.AlbumBottomMenu;
 
@@ -44,13 +43,13 @@ public class AlbumFragment extends Fragment {
     public static boolean isChooseMode = false;
     private String TAG = getClass().getSimpleName();
 
-    private List<AlbumBean> mData = new ArrayList<>();
-    private AlbumAdapter mAdapter;
+    private List<TimeBean> mData = new ArrayList<>();
+    private TimeAdapter mAdapter;
     private RecyclerView rc_list;
     private ProgressBar pb_loading;
     private AlbumBottomMenu album_menu;
 
-    private List<AlbumBean> choosedCache = new ArrayList<>();
+    private List<TimeBean> choosedCache = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,7 +76,7 @@ public class AlbumFragment extends Fragment {
         album_menu = view.findViewById(R.id.album_menu);
 
         rc_list = view.findViewById(R.id.rc_list);
-        mAdapter = new AlbumAdapter(mData);
+        mAdapter = new TimeAdapter(mData);
 
         rc_list.setLayoutManager(new LinearLayoutManager(getContext()));
         rc_list.setAdapter(mAdapter);
@@ -100,45 +99,45 @@ public class AlbumFragment extends Fragment {
 
     private void initData() {
 
-        AlbumHelper.getInstance().setAdapterListener(new AdapterListener<MediaBean>() {
+        AlbumHelper.getInstance().setAdapterListener(new AdapterListener<AlbumBean>() {
             @Override
-            public void onItemClick(MediaBean mediaBean, View v) {
-                AlbumBean albumBean = new AlbumBean();
-                albumBean.setDate(mediaBean.date);
+            public void onItemClick(AlbumBean albumBean, View v) {
+                TimeBean timeBean = new TimeBean();
+                timeBean.setDate(albumBean.date);
                 if (isChooseMode) {
-                    int index = choosedCache.indexOf(albumBean);
-                    List<MediaBean> mbList;
+                    int index = choosedCache.indexOf(timeBean);
+                    List<AlbumBean> mbList;
                     if (index < 0) {
                         //被选中
                         mbList = new ArrayList<>();
-                        mbList.add(mediaBean);
-                        albumBean.setItemList(mbList);
-                        choosedCache.add(albumBean);
+                        mbList.add(albumBean);
+                        timeBean.setItemList(mbList);
+                        choosedCache.add(timeBean);
                     } else {
                         mbList = choosedCache.get(index).itemList;
 
                         //如果被选中，则添加到缓存中
-                        if (mediaBean.isChecked) {
-                            mbList.add(mediaBean);
+                        if (albumBean.isChecked) {
+                            mbList.add(albumBean);
                         } else {
-                            mbList.remove(mediaBean);
+                            mbList.remove(albumBean);
                             if (mbList.size() == 0) {
                                 choosedCache.remove(index);
                             }
                         }
                     }
                 } else {
-                    int index = mData.indexOf(albumBean);
-                    AlbumBean ab = mData.get(index);
-                    index = ab.itemList.indexOf(mediaBean);
+                    int index = mData.indexOf(timeBean);
+                    TimeBean ab = mData.get(index);
+                    index = ab.itemList.indexOf(albumBean);
                     if (index >= 0) {
-                        AlbumPreviewActivity.start(getContext(), (ArrayList<MediaBean>) ab.itemList, index);
+                        AlbumPreviewActivity.start(getContext(), (ArrayList<AlbumBean>) ab.itemList, index);
                     }
                 }
             }
 
             @Override
-            public void onItemLongClick(MediaBean mediaBean, View v) {
+            public void onItemLongClick(AlbumBean albumBean, View v) {
                 //进入选择模式
                 isChooseMode = true;
                 mAdapter.notifyDataSetChanged();
@@ -160,9 +159,9 @@ public class AlbumFragment extends Fragment {
                         return it.getName().endsWith(".jpg") || it.getName().endsWith(".mp4");
                     }
                 })
-                .map(new Function<File, MediaBean>() {
+                .map(new Function<File, AlbumBean>() {
                     @Override
-                    public MediaBean apply(File file) throws Exception {
+                    public AlbumBean apply(File file) throws Exception {
                         Date fileDate = FileUtils.parseDate(file);
                         cal1.setTime(fileDate);
                         // 将时分秒,毫秒域清零
@@ -170,37 +169,37 @@ public class AlbumFragment extends Fragment {
                         cal1.set(Calendar.MINUTE, 0);
                         cal1.set(Calendar.SECOND, 0);
                         cal1.set(Calendar.MILLISECOND, 0);
-                        MediaBean mediaBean = new MediaBean();
-                        mediaBean.date = cal1.getTime().getTime();
-                        mediaBean.path = file.getAbsolutePath();
-                        return mediaBean;
+                        AlbumBean albumBean = new AlbumBean();
+                        albumBean.date = cal1.getTime().getTime();
+                        albumBean.path = file.getAbsolutePath();
+                        return albumBean;
                     }
                 })
-                .collect(new Callable<List<AlbumBean>>() {
+                .collect(new Callable<List<TimeBean>>() {
                     @Override
-                    public List<AlbumBean> call() throws Exception {
+                    public List<TimeBean> call() throws Exception {
                         return new ArrayList<>();
                     }
-                }, new BiConsumer<List<AlbumBean>, MediaBean>() {
+                }, new BiConsumer<List<TimeBean>, AlbumBean>() {
                     @Override
-                    public void accept(List<AlbumBean> albumBeans, MediaBean mediaBean) throws Exception {
-                        AlbumBean albumBean = new AlbumBean();
-                        albumBean.setDate(mediaBean.date);
-                        int index = albumBeans.indexOf(albumBean);
+                    public void accept(List<TimeBean> timeBeans, AlbumBean albumBean) throws Exception {
+                        TimeBean timeBean = new TimeBean();
+                        timeBean.setDate(albumBean.date);
+                        int index = timeBeans.indexOf(timeBean);
                         if (index >= 0) {
-                            albumBeans.get(index).itemList.add(mediaBean);
+                            timeBeans.get(index).itemList.add(albumBean);
                         } else {
-                            albumBean.itemList.add(mediaBean);
-                            albumBeans.add(albumBean);
+                            timeBean.itemList.add(albumBean);
+                            timeBeans.add(timeBean);
                         }
                     }
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
-                .subscribe(new BiConsumer<List<AlbumBean>, Throwable>() {
+                .subscribe(new BiConsumer<List<TimeBean>, Throwable>() {
                     @Override
-                    public void accept(List<AlbumBean> albumBeans, Throwable throwable) throws Exception {
-                        mData.addAll(albumBeans);
+                    public void accept(List<TimeBean> timeBeans, Throwable throwable) throws Exception {
+                        mData.addAll(timeBeans);
                         sortList();
                     }
                 });
@@ -212,9 +211,9 @@ public class AlbumFragment extends Fragment {
      * 数据根据时间进行排序
      */
     private void sortList() {
-        Collections.sort(mData, new Comparator<AlbumBean>() {
+        Collections.sort(mData, new Comparator<TimeBean>() {
             @Override
-            public int compare(AlbumBean o1, AlbumBean o2) {
+            public int compare(TimeBean o1, TimeBean o2) {
                 if (o1.date > o2.date) {
                     return -1;
                 } else if (o1.date == o2.date) {
@@ -237,25 +236,25 @@ public class AlbumFragment extends Fragment {
         //判断是多张还是单张
         if (choosedCache.size() == 1 && choosedCache.get(0).itemList.size() == 1) {
             //单张
-            MediaBean mediaBean = choosedCache.get(0).itemList.get(0);
-            ALShareManager.getInstance().openShare(getContext(), mediaBean.path);
+            AlbumBean albumBean = choosedCache.get(0).itemList.get(0);
+            TbShareManager.getInstance().openShare(getContext(), albumBean.path);
         } else {
             //多张
             ArrayList<Uri> uriList = new ArrayList<>();
             for (int i = 0; i < choosedCache.size(); i++) {
-                for (MediaBean mb :
+                for (AlbumBean mb :
                         choosedCache.get(i).itemList) {
                     uriList.add(Uri.fromFile(new File(mb.path)));
                 }
             }
-            ALShareManager.getInstance().openShare(getContext(),uriList);
+            TbShareManager.getInstance().openShare(getContext(),uriList);
         }
         resetRecycler();
     }
 
     private void resetRecycler() {
         for (int i = 0; i < choosedCache.size(); i++) {
-            for (MediaBean mb :
+            for (AlbumBean mb :
                     choosedCache.get(i).itemList) {
                 mb.isChecked = false;
             }
