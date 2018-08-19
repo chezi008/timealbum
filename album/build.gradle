@@ -34,8 +34,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
     //adapter dependence
-    implementation 'com.hannesdorfmann:adapterdelegates3:3.0.1'
+//    implementation 'com.hannesdorfmann:adapterdelegates3:3.0.1'
+    implementation 'com.ibbhub.android:adapterdelegate:1.0.0'
     //retrofit2
     implementation 'com.squareup.retrofit2:retrofit:2.2.0'
     //RxJava2 请求结果适配器

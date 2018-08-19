@@ -1,17 +1,11 @@
-package com.ibbhub.album.adapter;
+package com.ibbhub.album;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
-import com.ibbhub.album.AdapterListener;
-import com.ibbhub.album.AlbumFragment;
-import com.ibbhub.album.TaHelper;
-import com.ibbhub.album.bean.AlbumBean;
-import com.ibbhub.album.util.FileUtils;
-import com.ibbhub.album.view.TaAlbumView;
+import com.ibbhub.adapterdelegate.AbsFallbackAdapterDelegate;
 
 import java.util.List;
 
@@ -20,23 +14,20 @@ import java.util.List;
  * @description ：
  * @email ：chezi008@163.com
  */
-public class AlbumDelegate extends AdapterDelegate<List<AlbumBean>> {
+ class AlbumDelegate extends AbsFallbackAdapterDelegate<List<AlbumBean>> {
 
     private AdapterListener<AlbumBean> listener;
-    @Override
-    protected boolean isForViewType(@NonNull List<AlbumBean> items, int position) {
-        return true;
-    }
 
     @NonNull
     @Override
-    protected RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent) {
         listener = TaHelper.getInstance().getAdapterListener();
         return new AlbumDelegateHolder(new TaAlbumView(parent.getContext()));
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull final List<AlbumBean> items, final int position, @NonNull RecyclerView.ViewHolder holder, @NonNull List<Object> payloads) {
+    public void onBindViewHolder(@NonNull final List<AlbumBean> items, final int position, @NonNull RecyclerView.ViewHolder holder, @NonNull List<Object> payloads) {
+        super.onBindViewHolder(items,position,holder,payloads);
         final AlbumBean albumBean = items.get(position);
         final AlbumDelegateHolder mediaHolder = (AlbumDelegateHolder) holder;
         mediaHolder.taAlbumView.loadImage(albumBean.path);

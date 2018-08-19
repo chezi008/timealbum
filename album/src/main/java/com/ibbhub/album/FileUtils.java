@@ -1,4 +1,4 @@
-package com.ibbhub.album.util;
+package com.ibbhub.album;
 
 import android.media.ExifInterface;
 import android.text.TextUtils;
@@ -13,7 +13,7 @@ import java.util.Date;
  * @description ：
  * @email ：chezi008@163.com
  */
-public class FileUtils {
+class FileUtils {
     public static final String TAG = FileUtils.class.getSimpleName();
 
     public static Date parseDate(File file) {

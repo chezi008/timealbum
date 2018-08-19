@@ -1,7 +1,6 @@
-package com.ibbhub.album.adapter;
+package com.ibbhub.album;
 
-import com.hannesdorfmann.adapterdelegates3.ListDelegationAdapter;
-import com.ibbhub.album.bean.TimeBean;
+import com.ibbhub.adapterdelegate.IbbListDelegateAdapter;
 
 import java.util.List;
 
@@ -10,7 +9,7 @@ import java.util.List;
  * @description ：
  * @email ：chezi008@163.com
  */
-public class TimeAdapter extends ListDelegationAdapter<List<TimeBean>> {
+ class TimeAdapter extends IbbListDelegateAdapter<List<TimeBean>> {
 
     private TimeDelegate timeDelegate;
     public TimeAdapter(List<TimeBean> data) {
@@ -20,7 +19,7 @@ public class TimeAdapter extends ListDelegationAdapter<List<TimeBean>> {
 
     private void addDelegate() {
         timeDelegate = new TimeDelegate();
-        delegatesManager.addDelegate(timeDelegate);
+        delegatesManager.setFallbackDelegate(timeDelegate);
     }
 
 }

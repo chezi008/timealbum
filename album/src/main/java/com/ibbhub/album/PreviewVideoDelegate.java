@@ -1,4 +1,4 @@
-package com.ibbhub.album.adapter;
+package com.ibbhub.album;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
@@ -10,11 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.google.android.exoplayer2.ExoPlaybackException;
-import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
-import com.ibbhub.album.TaHelper;
-import com.ibbhub.album.R;
-import com.ibbhub.album.bean.AlbumBean;
-import com.ibbhub.album.util.FileUtils;
+import com.ibbhub.adapterdelegate.AdapterDelegate;
 
 import java.util.List;
 
@@ -27,21 +23,21 @@ import chuangyuan.ycj.videolibrary.widget.VideoPlayerView;
  * @description ：
  * @email ：chezi008@163.com
  */
-public class PreviewVideoDelegate extends AdapterDelegate<List<AlbumBean>> {
+ class PreviewVideoDelegate extends AdapterDelegate<List<AlbumBean>> {
     @Override
-    protected boolean isForViewType(@NonNull List<AlbumBean> items, int position) {
+    public boolean isForViewType(@NonNull List<AlbumBean> items, int position) {
         return items.get(position).path.endsWith(".mp4");
     }
 
     @NonNull
     @Override
-    protected RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_preview_video, parent, false);
         return new PreviewVideoHolder(view);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull List<AlbumBean> items, int position, @NonNull RecyclerView.ViewHolder holder, @NonNull List<Object> payloads) {
+    public void onBindViewHolder(@NonNull List<AlbumBean> items, int position, @NonNull RecyclerView.ViewHolder holder, @NonNull List<Object> payloads) {
         final PreviewVideoHolder pHolder = (PreviewVideoHolder) holder;
         AlbumBean mb = items.get(position);
         pHolder.vp.setTitle(FileUtils.obtainFileName(mb.path));

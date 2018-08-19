@@ -1,4 +1,4 @@
-package com.ibbhub.album.bean;
+package com.ibbhub.album;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -8,7 +8,7 @@ import android.os.Parcelable;
  * @description ：
  * @email ：chezi008@163.com
  */
-public class AlbumBean implements Parcelable {
+ class AlbumBean implements Parcelable {
     public String path;
     public long date;
     public boolean isChecked;

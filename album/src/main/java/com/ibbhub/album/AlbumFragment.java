@@ -12,12 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.ibbhub.album.adapter.TimeAdapter;
-import com.ibbhub.album.bean.TimeBean;
-import com.ibbhub.album.bean.AlbumBean;
-import com.ibbhub.album.util.FileUtils;
-import com.ibbhub.album.view.AlbumBottomMenu;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,10 +30,10 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * @author ：chezi008 on 2018/8/1 22:34
- * @description ：
+ * @description ：时间相册显示的主页面
  * @email ：chezi008@163.com
  */
-public class AlbumFragment extends Fragment {
+public abstract class AlbumFragment extends Fragment implements TimeAlbumListener {
     public static boolean isChooseMode = false;
     private String TAG = getClass().getSimpleName();
 
@@ -68,37 +62,11 @@ public class AlbumFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
+        initVariable();
         initData();
     }
 
-    private void initView(View view) {
-        pb_loading = view.findViewById(R.id.pb_loading);
-        album_menu = view.findViewById(R.id.album_menu);
-
-        rc_list = view.findViewById(R.id.rc_list);
-        mAdapter = new TimeAdapter(mData);
-
-        rc_list.setLayoutManager(new LinearLayoutManager(getContext()));
-        rc_list.setAdapter(mAdapter);
-
-        album_menu.setMenuListener(new AlbumBottomMenu.AlubmBottomMenuListener() {
-            @Override
-            public void onDeleteClick() {
-
-            }
-
-            @Override
-            public void onShareClick() {
-                //分享
-                processShare();
-            }
-        });
-    }
-
-    private Calendar cal1 = Calendar.getInstance();
-
-    private void initData() {
-
+    private void initVariable() {
         TaHelper.getInstance().setAdapterListener(new AdapterListener<AlbumBean>() {
             @Override
             public void onItemClick(AlbumBean albumBean, View v) {
@@ -142,8 +110,39 @@ public class AlbumFragment extends Fragment {
                 enterChoose();
             }
         });
+        TaHelper.getInstance()
+                .setSrcFiles(buildAlbumSrc())
+                .setTbDecoration(buildDecoration())
+                .setLoadImageListener(this);
+    }
 
+    private void initView(View view) {
+        pb_loading = view.findViewById(R.id.pb_loading);
+        album_menu = view.findViewById(R.id.album_menu);
 
+        rc_list = view.findViewById(R.id.rc_list);
+        mAdapter = new TimeAdapter(mData);
+
+        rc_list.setLayoutManager(new LinearLayoutManager(getContext()));
+        rc_list.setAdapter(mAdapter);
+
+        album_menu.setMenuListener(new AlbumBottomMenu.AlubmBottomMenuListener() {
+            @Override
+            public void onDeleteClick() {
+
+            }
+
+            @Override
+            public void onShareClick() {
+                //分享
+                processShare();
+            }
+        });
+    }
+
+    private Calendar cal1 = Calendar.getInstance();
+
+    private void initData() {
         List<File> fileList = TaHelper.getInstance().getSrcFiles();
         Observable.fromIterable(fileList)
                 .flatMapIterable(new Function<File, Iterable<File>>() {
@@ -281,4 +280,18 @@ public class AlbumFragment extends Fragment {
         mAdapter.notifyDataSetChanged();
         album_menu.setVisibility(View.VISIBLE);
     }
+
+    /**
+     * 设置相册的媒体源
+     *
+     * @return
+     */
+    public abstract List<File> buildAlbumSrc();
+
+    /**
+     * 设置recyclerView的装饰器
+     *
+     * @return
+     */
+    public abstract ITaDecoration buildDecoration();
 }

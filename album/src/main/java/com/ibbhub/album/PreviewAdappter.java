@@ -1,7 +1,6 @@
-package com.ibbhub.album.adapter;
+package com.ibbhub.album;
 
-import com.hannesdorfmann.adapterdelegates3.ListDelegationAdapter;
-import com.ibbhub.album.bean.AlbumBean;
+import com.ibbhub.adapterdelegate.ListDelegationAdapter;
 
 import java.util.List;
 
@@ -10,7 +9,7 @@ import java.util.List;
  * @description ：
  * @email ：chezi008@163.com
  */
-public class PreviewAdappter extends ListDelegationAdapter<List<AlbumBean>> {
+ class PreviewAdappter extends ListDelegationAdapter<List<AlbumBean>> {
 
     public PreviewAdappter(List<AlbumBean> data) {
         delegatesManager.addDelegate(new PreviewPhotoDelegate());

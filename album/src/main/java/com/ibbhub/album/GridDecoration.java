@@ -1,4 +1,4 @@
-package com.ibbhub.album.view;
+package com.ibbhub.album;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,7 @@ import android.view.View;
  * @description ：
  * @email ：chezi008@163.com
  */
-public class GridDecoration extends RecyclerView.ItemDecoration {
+ class GridDecoration extends RecyclerView.ItemDecoration {
 
     private int spanCount;
     private int spacing;

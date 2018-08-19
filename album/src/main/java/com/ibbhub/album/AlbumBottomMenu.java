@@ -1,4 +1,4 @@
-package com.ibbhub.album.view;
+package com.ibbhub.album;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -10,14 +10,12 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.ibbhub.album.R;
-
 /**
  * @author ：chezi008 on 2018/8/1 22:40
  * @description ：Menu bottom of album
  * @email ：chezi008@163.com
  */
-public class AlbumBottomMenu extends LinearLayout {
+ class AlbumBottomMenu extends LinearLayout {
 
     private ImageView iv_delete, iv_share;
 

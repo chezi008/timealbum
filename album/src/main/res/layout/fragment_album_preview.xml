@@ -9,8 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"></android.support.v7.widget.RecyclerView>
-    <com.ibbhub.album.view.AlbumBottomMenu
+    <com.ibbhub.album.AlbumBottomMenu
         android:id="@+id/abMenu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></com.ibbhub.album.view.AlbumBottomMenu>
+        android:layout_height="wrap_content"></com.ibbhub.album.AlbumBottomMenu>
 </LinearLayout>

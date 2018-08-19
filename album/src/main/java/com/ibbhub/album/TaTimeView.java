@@ -1,4 +1,4 @@
-package com.ibbhub.album.view;
+package com.ibbhub.album;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -8,11 +8,6 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.ibbhub.album.TaHelper;
-import com.ibbhub.album.adapter.AlbumAdapter;
-import com.ibbhub.album.bean.AlbumBean;
-import com.ibbhub.album.bean.TimeBean;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +16,7 @@ import java.util.List;
  * @description ：
  * @email ：chezi008@163.com
  */
-public class TaTimeView extends LinearLayout {
+ class TaTimeView extends LinearLayout {
     public TaTimeView(Context context) {
         this(context, null);
     }
@@ -69,6 +64,4 @@ public class TaTimeView extends LinearLayout {
         data.addAll(timeBean.itemList);
         adapter.notifyDataSetChanged();
     }
-
-
 }

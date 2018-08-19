@@ -1,4 +1,4 @@
-package com.ibbhub.album.bean;
+package com.ibbhub.album;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -11,7 +11,7 @@ import java.util.List;
  * @description ：
  * @email ：chezi008@163.com
  */
-public class TimeBean implements Parcelable {
+ class TimeBean implements Parcelable {
     public long date;
     public List<AlbumBean> itemList = new ArrayList<>();
 

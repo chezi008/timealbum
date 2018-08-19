@@ -1,4 +1,4 @@
-package com.ibbhub.album.view;
+package com.ibbhub.album;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,15 +11,12 @@ import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.ibbhub.album.TaHelper;
-import com.ibbhub.album.R;
-
 /**
  * @author ：chezi008 on 2018/8/3 21:18
  * @description ：the view of photo or video
  * @email ：chezi008@163.com
  */
-public class TaAlbumView extends FrameLayout {
+ class TaAlbumView extends FrameLayout {
 
     public static final int STYLE_PHOTO = 0;
     public static final int STYLE_VIDEO = 1;

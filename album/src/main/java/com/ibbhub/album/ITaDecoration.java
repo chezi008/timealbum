@@ -1,4 +1,4 @@
-package com.ibbhub.album.view;
+package com.ibbhub.album;
 
 import android.view.View;
 

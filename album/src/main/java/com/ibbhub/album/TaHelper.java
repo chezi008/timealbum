@@ -2,9 +2,6 @@ package com.ibbhub.album;
 
 import android.widget.ImageView;
 
-import com.ibbhub.album.bean.AlbumBean;
-import com.ibbhub.album.view.ITaDecoration;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +11,7 @@ import java.util.List;
  * @description ：Single instance
  * @email ：chezi008@163.com
  */
-public class TaHelper {
+ class TaHelper {
 
     private List<File> srcFiles = new ArrayList<>();
     private TimeAlbumListener timeAlbumListener;
@@ -68,70 +65,47 @@ public class TaHelper {
         return AlbumHelperHolder.instance;
     }
 
-    static class AlbumHelperHolder {
+    private static class AlbumHelperHolder {
         static final TaHelper instance = new TaHelper();
     }
 
-    public interface TimeAlbumListener {
-        /**
-         * 加载图片，覆盖原来图片的大小
-         *
-         * @param path
-         * @param iv
-         */
-        void loadOverrideImage(String path, ImageView iv);
-
-        /**
-         * 加载图片
-         *
-         * @param path
-         * @param iv
-         */
-        void loadImage(String path, ImageView iv);
-
-        /**
-         * 选择模式改变
-         *
-         * @param isChoose
-         */
-        void onChooseModeChange(boolean isChoose);
+    /**
+     * 设置媒体源的文件路径
+     *
+     * @param mediaFile
+     * @return
+     */
+    public TaHelper setSrcFiles(File... mediaFile) {
+        srcFiles.clear();
+        for (File file :
+                mediaFile) {
+            srcFiles.add(file);
+        }
+        return this;
+    }
+    public TaHelper setSrcFiles(List<File> fileList) {
+        srcFiles.clear();
+        srcFiles.addAll(fileList);
+        return this;
     }
 
-    public static class Builder {
-        private TaHelper helper;
-        private AlbumFragment fragment;
+    /**
+     * 设置加载图片的回调
+     *
+     * @param listener
+     */
+    public TaHelper setLoadImageListener(TimeAlbumListener listener) {
+        timeAlbumListener = listener;
+        return this;
+    }
 
-        public Builder() {
-            helper = TaHelper.getInstance();
-            fragment = new AlbumFragment();
-        }
-
-        /**
-         * @param mediaFile
-         * @return
-         */
-        public Builder setSrcFiles(File... mediaFile) {
-            helper.srcFiles.clear();
-            for (File file :
-                    mediaFile) {
-                helper.srcFiles.add(file);
-            }
-            return this;
-        }
-
-        public Builder setLoadImageListener(TimeAlbumListener listener) {
-            helper.timeAlbumListener = listener;
-            return this;
-        }
-
-        public Builder setTbDecoration(ITaDecoration iTaDecoration) {
-            helper.decoration = iTaDecoration;
-            return this;
-        }
-
-        public AlbumFragment create() {
-            return fragment;
-        }
+    /**
+     * Set decoration of recyclerView
+     * @param iTaDecoration
+     */
+    public TaHelper setTbDecoration(ITaDecoration iTaDecoration) {
+        decoration = iTaDecoration;
+        return this;
     }
 
 }

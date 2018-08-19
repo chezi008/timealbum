@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
  * @description ：使得recyclerView达到viewPager的效果
  * @email ：chezi008@163.com
  */
-public class TaPagerHelper extends PagerSnapHelper {
+class TaPagerHelper extends PagerSnapHelper {
     private PageHelperListener listener;
 
     @Override

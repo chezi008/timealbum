@@ -1,4 +1,4 @@
-package com.ibbhub.album.view;
+package com.ibbhub.album;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
  * @description ：The decoration of timeAlbum
  * @email ：chezi008@163.com
  */
-public class TaDecoration implements ITaDecoration {
+ class TaDecoration implements ITaDecoration {
 
     private TextView mTvDate, mTvNum;
     private LinearLayout llParent;

@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @description ：The share manager of album
  * @email ：chezi008@163.com
  */
-public class TaShareManager {
+ class TaShareManager {
     private TaShareManager() {
 
     }

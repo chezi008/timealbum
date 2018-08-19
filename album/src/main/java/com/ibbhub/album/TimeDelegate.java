@@ -1,13 +1,10 @@
-package com.ibbhub.album.adapter;
+package com.ibbhub.album;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
-import com.ibbhub.album.TaHelper;
-import com.ibbhub.album.bean.TimeBean;
-import com.ibbhub.album.view.TaTimeView;
+import com.ibbhub.adapterdelegate.AbsFallbackAdapterDelegate;
 
 import java.util.List;
 
@@ -16,22 +13,18 @@ import java.util.List;
  * @description ：
  * @email ：chezi008@163.com
  */
-public class TimeDelegate extends AdapterDelegate<List<TimeBean>> {
+ class TimeDelegate extends AbsFallbackAdapterDelegate<List<TimeBean>> {
 
-
-    @Override
-    protected boolean isForViewType(@NonNull List<TimeBean> items, int position) {
-        return true;
-    }
 
     @NonNull
     @Override
-    protected RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent) {
         return new TimeDelegateHolder(new TaTimeView(parent.getContext()));
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull final List<TimeBean> items, final int position, @NonNull RecyclerView.ViewHolder holder, @NonNull List<Object> payloads) {
+    public void onBindViewHolder(@NonNull List<TimeBean> items, int position, @NonNull RecyclerView.ViewHolder holder, @NonNull List<Object> payloads) {
+        super.onBindViewHolder(items, position, holder, payloads);
         TimeDelegateHolder albumHolder = (TimeDelegateHolder) holder;
         albumHolder.timeView.notify(items.get(position));
     }

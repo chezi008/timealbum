@@ -10,10 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ibbhub.album.adapter.PreviewAdappter;
-import com.ibbhub.album.bean.AlbumBean;
-import com.ibbhub.album.view.AlbumBottomMenu;
-
 import java.util.List;
 
 /**
