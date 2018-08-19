@@ -8,7 +8,7 @@ import android.os.Parcelable;
  * @description ：
  * @email ：chezi008@163.com
  */
- class AlbumBean implements Parcelable {
+ public class AlbumBean implements Parcelable {
     public String path;
     public long date;
     public boolean isChecked;

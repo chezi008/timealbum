@@ -12,7 +12,7 @@ import java.util.List;
  class AlbumAdapter extends IbbListDelegateAdapter<List<AlbumBean>> {
 
     public AlbumAdapter(List<AlbumBean> data) {
-        delegatesManager.setFallbackDelegate(new AlbumDelegate());
+        delegatesManager.addDelegate(new AlbumDelegate());
         setItems(data);
     }
 

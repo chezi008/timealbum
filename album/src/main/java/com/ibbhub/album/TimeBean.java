@@ -19,6 +19,10 @@ import java.util.List;
 
     }
 
+    public TimeBean(long date) {
+        this.date = date;
+    }
+
     protected TimeBean(Parcel in) {
         date = in.readLong();
         itemList = in.createTypedArrayList(AlbumBean.CREATOR);

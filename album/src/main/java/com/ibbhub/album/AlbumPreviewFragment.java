@@ -72,4 +72,6 @@ public class AlbumPreviewFragment extends Fragment {
         });
         taPagerHelper.attachToRecyclerView(rcList);
     }
+
+
 }

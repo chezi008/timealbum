@@ -1,10 +1,12 @@
 package com.ibbhub.album;
 
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -99,7 +101,7 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
                     TimeBean ab = mData.get(index);
                     index = ab.itemList.indexOf(albumBean);
                     if (index >= 0) {
-                        AlbumPreviewActivity.start(getContext(), (ArrayList<AlbumBean>) ab.itemList, index);
+                        start2Preview((ArrayList<AlbumBean>) ab.itemList, index);
                     }
                 }
             }
@@ -129,7 +131,7 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
         album_menu.setMenuListener(new AlbumBottomMenu.AlubmBottomMenuListener() {
             @Override
             public void onDeleteClick() {
-
+                showConfirmDelete();
             }
 
             @Override
@@ -138,6 +140,23 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
                 processShare();
             }
         });
+    }
+
+    /**
+     * 弹出确认删除提示
+     */
+    private void showConfirmDelete() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("删除照片");
+        builder.setMessage("确认是否删除照片？");
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                processDelete();
+            }
+        });
+        builder.setNegativeButton("取消", null);
+        builder.show();
     }
 
     private Calendar cal1 = Calendar.getInstance();
@@ -230,6 +249,9 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
         });
     }
 
+    /**
+     * 处理分享
+     */
     private void processShare() {
         //判断是多张还是单张
         if (choosedCache.size() == 1 && choosedCache.get(0).itemList.size() == 1) {
@@ -250,6 +272,38 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
         resetRecycler();
     }
 
+    /**
+     * 处理照片删除
+     */
+    private void processDelete() {
+        //判断是多张还是单张
+        if (choosedCache.size() == 1 && choosedCache.get(0).itemList.size() == 1) {
+            //单张
+            AlbumBean albumBean = choosedCache.get(0).itemList.get(0);
+            notifyAlbumRemove(albumBean);
+        } else {
+            //多张
+            for (int i = 0; i < choosedCache.size(); i++) {
+                for (AlbumBean mb :
+                        choosedCache.get(i).itemList) {
+                    notifyAlbumRemove(mb);
+                }
+            }
+        }
+        choosedCache.clear();
+    }
+
+    private void notifyAlbumRemove(AlbumBean albumBean) {
+        FileUtils.delete(albumBean.path);
+        int index = mData.indexOf(new TimeBean(albumBean.date));
+        TimeBean tb = mData.get(index);
+        tb.itemList.remove(albumBean);
+        if (tb.itemList.size() == 0) {
+            mData.remove(index);
+        }
+        mAdapter.notifyItemRemoved(index);
+    }
+
     private void resetRecycler() {
         for (int i = 0; i < choosedCache.size(); i++) {
             for (AlbumBean mb :
@@ -261,6 +315,7 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
         isChooseMode = false;
         TaHelper.getInstance().onChooseModeChange(isChooseMode);
         mAdapter.notifyDataSetChanged();
+        album_menu.setVisibility(View.GONE);
     }
 
     /**
@@ -268,7 +323,6 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
      */
     public void cancelChoose() {
         resetRecycler();
-        album_menu.setVisibility(View.GONE);
     }
 
     /**
@@ -294,4 +348,14 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
      * @return
      */
     public abstract ITaDecoration buildDecoration();
+
+    /**
+     * 跳转至预览界面
+     *
+     * @param data 预览数据
+     * @param pos  当前选择albumBean 的位置
+     */
+    public void start2Preview(ArrayList<AlbumBean> data, int pos) {
+        AlbumPreviewActivity.start(getContext(), data, pos);
+    }
 }

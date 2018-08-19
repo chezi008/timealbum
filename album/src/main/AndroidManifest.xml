@@ -3,7 +3,10 @@
     package="com.ibbhub.album">
 
     <application>
-        <activity android:name=".AlbumPreviewActivity"></activity>
+        <activity
+            android:name=".AlbumPreviewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:hardwareAccelerated="true"></activity>
     </application>
 
 </manifest>

@@ -40,4 +40,6 @@ public class AlbumPreviewActivity extends AppCompatActivity {
         starter.putExtra("pos", pos);
         context.startActivity(starter);
     }
+
+
 }

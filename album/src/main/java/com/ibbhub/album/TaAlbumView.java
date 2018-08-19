@@ -50,6 +50,7 @@ import android.widget.ImageView;
                 v_mask.setVisibility(isChecked ? VISIBLE : GONE);
             }
         });
+
     }
 
     public void setStyle(int style) {
@@ -72,6 +73,11 @@ import android.widget.ImageView;
 
     public boolean isCheckMode(){
         return cb_check.getVisibility() == VISIBLE;
+
+    }
+
+    public void setOnCheckedChangeListener(@Nullable CompoundButton.OnCheckedChangeListener listener){
+        cb_check.setOnCheckedChangeListener(listener);
     }
 
     public void loadImage(String path) {
@@ -89,5 +95,6 @@ import android.widget.ImageView;
         } else {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         }
+
     }
 }
