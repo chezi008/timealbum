@@ -269,7 +269,7 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
             }
             TaShareManager.getInstance().openShare(getContext(), uriList);
         }
-        resetRecycler();
+        cancelChoose();
     }
 
     /**
@@ -304,7 +304,11 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
         mAdapter.notifyItemRemoved(index);
     }
 
-    private void resetRecycler() {
+
+    /**
+     * 取消选择
+     */
+    public void cancelChoose() {
         for (int i = 0; i < choosedCache.size(); i++) {
             for (AlbumBean mb :
                     choosedCache.get(i).itemList) {
@@ -316,13 +320,6 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
         TaHelper.getInstance().onChooseModeChange(isChooseMode);
         mAdapter.notifyDataSetChanged();
         album_menu.setVisibility(View.GONE);
-    }
-
-    /**
-     * 取消选择
-     */
-    public void cancelChoose() {
-        resetRecycler();
     }
 
     /**
