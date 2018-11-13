@@ -1,4 +1,5 @@
 # TimeAlbum 时间相册
+[![](https://jitpack.io/v/chezi008/TimeAlbum.svg)](https://jitpack.io/#chezi008/TimeAlbum)
 
 ## 功能说明
 1、图片和视频资源根据日期排序显示。
@@ -14,12 +15,12 @@ You need to make sure you have the JCenter and Google repositories included in t
 ```
 repositories {
         jcenter()
-        mavenCentral();
+        maven { url 'https://jitpack.io' }
     }
 ```
 Next add a dependency in the build.gradle file of your app module. The following will add a dependency to the full library:
 ```
-implementation 'com.ibbhub.android:timealbum:1.0.0'
+implementation 'com.github.chezi008:TimeAlbum:1.0.0'
 ```
 maven
 ```
