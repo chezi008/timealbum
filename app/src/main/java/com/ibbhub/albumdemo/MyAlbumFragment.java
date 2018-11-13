@@ -52,7 +52,7 @@ public class MyAlbumFragment extends AlbumFragment {
 
     @Override
     public void onChooseModeChange(boolean isChoose) {
-        ((MainActivity)getActivity()).onChooseModeChange(isChoose);
+        ((AlbumActivity)getActivity()).onChooseModeChange(isChoose);
     }
 
     public static RequestOptions buildOptions() {

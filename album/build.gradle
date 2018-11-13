@@ -51,4 +51,3 @@ dependencies {
     //photoView
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
 }
-//apply from: "bintrayUpload.gradle"

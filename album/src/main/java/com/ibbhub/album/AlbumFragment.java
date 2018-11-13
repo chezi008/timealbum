@@ -216,8 +216,11 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
                 .subscribe(new BiConsumer<List<TimeBean>, Throwable>() {
                     @Override
                     public void accept(List<TimeBean> timeBeans, Throwable throwable) throws Exception {
-                        mData.addAll(timeBeans);
-                        sortList();
+                        if (timeBeans != null) {
+                            mData.addAll(timeBeans);
+                            sortList();
+                        }
+
                     }
                 });
 
