@@ -25,12 +25,11 @@ implementation 'com.github.chezi008:TimeAlbum:1.0.0'
 ```
 maven
 ```
-<dependency>
-  <groupId>com.ibbhub.android</groupId>
-  <artifactId>timealbum</artifactId>
-  <version>1.0.0</version>
-  <type>pom</type>
-</dependency>
+	<dependency>
+  	<groupId>com.github.chezi008</groupId>
+	<artifactId>TimeAlbum</artifactId>
+	<version>1.0.0</version>
+	</dependency>
 ```
 
 ## 如何使用
