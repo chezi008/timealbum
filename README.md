@@ -11,6 +11,11 @@
 6、图片显示可自定义扩展。
 7、图片视频可自定义预览操作。
 
+## 更新说明
+### 1.0.1
+- 预览界面添加删除功能。
+- 添加超级照片的标记。
+
 ## 依赖
 You need to make sure you have the JCenter and Google repositories included in the build.gradle file in the root of your project:
 ```

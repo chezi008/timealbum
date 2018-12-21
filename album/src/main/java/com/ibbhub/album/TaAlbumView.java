@@ -25,6 +25,8 @@ import android.widget.ImageView;
     private CheckBox cb_check;
     private View v_mask;
 
+    public ImageView ivFlag;
+
     public TaAlbumView(@NonNull Context context) {
         this(context, null);
     }
@@ -40,6 +42,7 @@ import android.widget.ImageView;
         iv_play = findViewById(R.id.iv_play);
         cb_check = findViewById(R.id.cb_check);
         v_mask = findViewById(R.id.v_mask);
+        ivFlag = findViewById(R.id.ivFlag);
         //The default style
         setStyle(STYLE_PHOTO);
         setChooseStyle(false);
@@ -69,6 +72,7 @@ import android.widget.ImageView;
     public void setChecked(boolean checked) {
         cb_check.setChecked(checked);
     }
+
 
 
     public boolean isCheckMode(){

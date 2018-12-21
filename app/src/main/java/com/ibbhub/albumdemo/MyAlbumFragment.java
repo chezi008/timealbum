@@ -6,7 +6,9 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.ibbhub.album.AlbumBean;
 import com.ibbhub.album.AlbumFragment;
+import com.ibbhub.album.AlbumPreviewActivity;
 import com.ibbhub.album.ITaDecoration;
 
 import java.io.File;
@@ -60,5 +62,10 @@ public class MyAlbumFragment extends AlbumFragment {
         requestOptions.override(100, 100);
         requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
         return requestOptions;
+    }
+
+    @Override
+    public void start2Preview(ArrayList<AlbumBean> data, int pos) {
+        MyPreviewActivity.start(getContext(), data, pos);
     }
 }

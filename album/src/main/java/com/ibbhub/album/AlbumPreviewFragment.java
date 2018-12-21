@@ -28,7 +28,7 @@ public class AlbumPreviewFragment extends Fragment implements TaPagerHelper.Page
     private RecyclerView rcList;
     private AlbumBottomMenu abMenu;
 
-    private List<AlbumBean> mData = new ArrayList<>();
+    protected List<AlbumBean> mData = new ArrayList<>();
     private PreviewAdappter mAdappter;
     private TaPagerHelper taPagerHelper = new TaPagerHelper();
 

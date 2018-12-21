@@ -39,6 +39,9 @@ class AlbumDelegate extends AbsFallbackAdapterDelegate<List<AlbumBean>> {
         mediaHolder.taAlbumView.setChooseStyle(AlbumFragment.isChooseMode);
         mediaHolder.taAlbumView.setChecked(albumBean.isChecked);
 
+
+        boolean flagVisiable = albumBean.path.contains("super");
+        mediaHolder.taAlbumView.ivFlag.setVisibility(flagVisiable?View.VISIBLE:View.GONE);
     }
 
     public class AlbumDelegateHolder extends RecyclerView.ViewHolder {
