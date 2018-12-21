@@ -32,7 +32,7 @@ public class AlbumPreviewFragment extends Fragment implements TaPagerHelper.Page
     private PreviewAdappter mAdappter;
     private TaPagerHelper taPagerHelper = new TaPagerHelper();
 
-    private int position;
+    protected int position;
 
     @Nullable
     @Override
