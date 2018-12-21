@@ -27,8 +27,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     //权限
     implementation 'com.yanzhenjie:permission:2.0.0-rc11'
-//    implementation project(':album')
-    implementation 'com.github.chezi008:TimeAlbum:1.0.0'
+    implementation project(':album')
+//    implementation 'com.github.chezi008:TimeAlbum:1.0.0'
 
     //图片加载框架
     implementation "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"

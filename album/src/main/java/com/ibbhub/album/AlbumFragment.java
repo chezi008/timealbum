@@ -14,6 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,8 +54,14 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 
     @Nullable
     @Override
@@ -304,8 +314,9 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
         if (tb.itemList.size() == 0) {
             mData.remove(index);
         }
-        mAdapter.notifyItemRemoved(index);
+        mAdapter.notifyItemChanged(index);
     }
+
 
 
     /**
@@ -357,5 +368,10 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
      */
     public void start2Preview(ArrayList<AlbumBean> data, int pos) {
         AlbumPreviewActivity.start(getContext(), data, pos);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void processDeleteEvent(DeleteEvent event){
+        notifyAlbumRemove(event.albumBean);
     }
 }

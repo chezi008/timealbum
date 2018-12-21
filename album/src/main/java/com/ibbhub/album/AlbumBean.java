@@ -70,4 +70,13 @@ import android.os.Parcelable;
         dest.writeLong(date);
         dest.writeByte((byte) (isChecked ? 1 : 0));
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof AlbumBean){
+            AlbumBean albumBean = (AlbumBean) obj;
+            return albumBean.path.equals(path);
+        }
+        return super.equals(obj);
+    }
 }
