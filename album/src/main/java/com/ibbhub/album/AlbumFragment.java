@@ -79,6 +79,7 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
     }
 
     private void initVariable() {
+        isChooseMode = false;
         TaHelper.getInstance().setAdapterListener(new AdapterListener<AlbumBean>() {
             @Override
             public void onItemClick(AlbumBean albumBean, View v) {
