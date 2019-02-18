@@ -3,6 +3,17 @@
     package="com.ibbhub.album">
 
     <application>
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.ibbhub.album.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <!-- 元数据 -->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
         <activity
             android:name=".AlbumPreviewActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

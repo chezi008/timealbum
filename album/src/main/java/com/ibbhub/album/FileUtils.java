@@ -29,8 +29,8 @@ class FileUtils {
             if (!TextUtils.isEmpty(date)) {
                 date1 = DateUtils.convertToDate(date);
             } else {
-                date1 = DateUtils.convertToDate("1995:03:13 22:38:20");
-//                date1 = new Date(file.lastModified());
+//                date1 = DateUtils.convertToDate("1995:03:13 22:38:20");
+                date1 = new Date(file.lastModified());
             }
             Log.i("date", date);
         } catch (Exception e) {
