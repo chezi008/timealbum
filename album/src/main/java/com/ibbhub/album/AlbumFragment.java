@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -184,6 +185,7 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
                 .filter(new Predicate<File>() {
                     @Override
                     public boolean test(File it) throws Exception {
+                        Log.d(TAG, "test: "+it.getAbsolutePath());
                         return it.getName().endsWith(".jpg") || it.getName().endsWith(".mp4");
                     }
                 })
