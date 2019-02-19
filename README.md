@@ -16,6 +16,35 @@
 - 预览界面添加删除功能。
 - 添加超级照片的标记。
 
+### 1.0.3
+- 继承AlbumFragment 需要实现fileProviderName()方法，因为Android 7.0及以上系统Uri.fromFile获取Uri会报错。fileProviderName()方法返回的值填下方的authorities对应的值。
+```
+<provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.ibbhub.albumdemo.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <!-- 元数据 -->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+```
+file_paths内容
+```
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <paths>
+        <external-path
+            name="external_files"
+            path="." />
+    </paths>
+</resources>
+```
+
+- 修复删除多个文件失败的问题
+
 ## 依赖
 You need to make sure you have the JCenter and Google repositories included in the build.gradle file in the root of your project:
 ```
@@ -26,7 +55,7 @@ repositories {
 ```
 Next add a dependency in the build.gradle file of your app module. The following will add a dependency to the full library:
 ```
-implementation 'com.github.chezi008:TimeAlbum:1.0.0'
+implementation 'com.github.chezi008:TimeAlbum:x.x.x'
 ```
 maven
 ```
