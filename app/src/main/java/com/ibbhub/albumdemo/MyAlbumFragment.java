@@ -8,7 +8,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.ibbhub.album.AlbumBean;
 import com.ibbhub.album.AlbumFragment;
-import com.ibbhub.album.AlbumPreviewActivity;
 import com.ibbhub.album.ITaDecoration;
 
 import java.io.File;
@@ -35,6 +34,11 @@ public class MyAlbumFragment extends AlbumFragment {
     @Override
     public ITaDecoration buildDecoration() {
         return null;
+    }
+
+    @Override
+    public String fileProviderName() {
+        return BuildConfig.APPLICATION_ID+".provider";
     }
 
     @Override

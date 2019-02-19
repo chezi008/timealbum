@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.content.FileProvider;
+import android.text.TextUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -22,6 +23,13 @@ import java.util.ArrayList;
         return ALShareManagerHolder.instance;
     }
 
+
+    private String fileProviderName;
+
+    public void setFileProviderName(String fileProviderName) {
+        this.fileProviderName = fileProviderName;
+    }
+
     /**
      * 分享
      *
@@ -29,7 +37,11 @@ import java.util.ArrayList;
      * @param path
      */
     public void openShare(Context ctx, String path) {
-        Uri imageUri =FileProvider.getUriForFile(ctx, BuildConfig.APPLICATION_ID + ".provider", new File(path));
+        if (TextUtils.isEmpty(fileProviderName)) {
+            throw new NullPointerException("请在 albumfragment 设置fileProviderName");
+        }
+//        BuildConfig.APPLICATION_ID + ".provider"
+        Uri imageUri =FileProvider.getUriForFile(ctx, fileProviderName, new File(path));
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);

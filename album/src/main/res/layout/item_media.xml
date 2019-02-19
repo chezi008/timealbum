@@ -36,6 +36,7 @@
         android:layout_gravity="top|right"
         android:paddingRight="5dp"
         android:paddingTop="10dp"
+        android:clickable="false"
         android:visibility="visible" />
     <ImageView
         android:id="@+id/ivFlag"

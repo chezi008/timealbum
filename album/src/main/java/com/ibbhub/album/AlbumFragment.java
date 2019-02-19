@@ -81,6 +81,7 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
 
     private void initVariable() {
         isChooseMode = false;
+        TaShareManager.getInstance().setFileProviderName(fileProviderName());
         TaHelper.getInstance().setAdapterListener(new AdapterListener<AlbumBean>() {
             @Override
             public void onItemClick(AlbumBean albumBean, View v) {
@@ -107,6 +108,7 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
                                 choosedCache.remove(index);
                             }
                         }
+//                        Log.d(TAG, "onItemClick: choosedCacheSize:"+mbList.size());
                     }
                 } else {
                     int index = mData.indexOf(timeBean);
@@ -185,7 +187,7 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
                 .filter(new Predicate<File>() {
                     @Override
                     public boolean test(File it) throws Exception {
-                        Log.d(TAG, "test: "+it.getAbsolutePath());
+//                        Log.d(TAG, "test: "+it.getAbsolutePath());
                         return it.getName().endsWith(".jpg") || it.getName().endsWith(".mp4");
                     }
                 })
@@ -299,7 +301,10 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
             notifyAlbumRemove(albumBean);
         } else {
             //多张
+
+
             for (int i = 0; i < choosedCache.size(); i++) {
+//                Log.d(TAG, "processDelete:  choosedCache.get(i).itemList："+ choosedCache.get(i).itemList.size());
                 for (AlbumBean mb :
                         choosedCache.get(i).itemList) {
                     notifyAlbumRemove(mb);
@@ -312,6 +317,7 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
     private void notifyAlbumRemove(AlbumBean albumBean) {
         FileUtils.delete(albumBean.path);
         int index = mData.indexOf(new TimeBean(albumBean.date));
+//        Log.d(TAG, "notifyAlbumRemove: index:"+index);
         TimeBean tb = mData.get(index);
         tb.itemList.remove(albumBean);
         if (tb.itemList.size() == 0) {
@@ -344,7 +350,7 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
      */
     public void enterChoose() {
         isChooseMode = true;
-        TaHelper.getInstance().onChooseModeChange(isChooseMode);
+        TaHelper.getInstance().onChooseModeChange(true);
         mAdapter.notifyDataSetChanged();
         album_menu.setVisibility(View.VISIBLE);
     }
@@ -362,6 +368,8 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
      * @return
      */
     public abstract ITaDecoration buildDecoration();
+
+    public abstract String fileProviderName();
 
     /**
      * 跳转至预览界面
