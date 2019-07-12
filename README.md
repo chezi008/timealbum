@@ -1,8 +1,10 @@
 # TimeAlbum 时间相册
 
+该库是将本地的图片和视频资源进行按时间分类排序并进行展示的相册库。
+
 [![](https://jitpack.io/v/chezi008/TimeAlbum.svg)](https://jitpack.io/#chezi008/TimeAlbum)
 
-## 功能说明
+#### 功能说明
 1. 图片和视频资源根据日期排序显示。
 2. 图片视频预览功能，图片、视频预览带缓存功能。
 3. 单个图片或视频可进行删除及分享操作。
@@ -11,12 +13,14 @@
 6. 图片显示可自定义扩展。
 7. 图片视频可自定义预览操作。
 
-## 更新说明
-### 1.0.1
+#### 更新说明
+**1.0.1**
+
 - 预览界面添加删除功能。
 - 添加超级照片的标记。
 
-### 1.0.3
+**1.0.3**
+
 - 继承AlbumFragment 需要实现fileProviderName()方法，因为Android 7.0及以上系统Uri.fromFile获取Uri会报错。fileProviderName()方法返回的值填下方的authorities对应的值。
 ```
 <provider
@@ -45,7 +49,7 @@ file_paths内容
 
 - 修复删除多个文件失败的问题
 
-## 依赖
+#### 依赖
 You need to make sure you have the JCenter and Google repositories included in the build.gradle file in the root of your project:
 ```
 repositories {
@@ -66,7 +70,7 @@ maven
 	</dependency>
 ```
 
-## 如何使用
+#### 如何使用
 **只需要继承AlbumFragment即可**。需要实现的方法下面有详细的说明：
 ```
 /**
@@ -165,7 +169,7 @@ public class MyAlbumFragment extends AlbumFragment {
 }
 ```
 
-## 扩展Decoration
+#### 扩展Decoration
 相册默认的decoration为浅蓝色背景带日期和图片数量提示的。用户可以自定义decoration进行显示，只需要实现**ITaDecoration**接口，在继承AlbumFragment的buildDecoration方法中返回即可。
 ```
 public interface ITaDecoration {
@@ -190,15 +194,15 @@ public interface ITaDecoration {
     View buildView();
 }
 ```
-## 显示效果
+#### 显示效果
 | 相册主页 | 多选效果 | 预览照片 | 预览视频 |
 | ------ | ------ | ------ |------ |
 | ![](https://i.imgur.com/BR8Txtb.png) | ![](https://i.imgur.com/qYwCh00.png) | ![](https://i.imgur.com/HwGg87J.png) |![](https://i.imgur.com/jwWbcCT.png)|
 
-## 性能方面
+#### 性能方面
 图片预览使用的是glide包，用户也可以自己选择加载图片的框架，所以这里的性能方面无需担忧。
 
-## 问题
+#### 问题
 **1、recycleview 在grid模式下面如何添加ItemDecoration(item间隙)?**
 之前一直遇到，item之间的间隔大小不均的问题，后面再stackOverFlow里面找到了答案：
 ```
@@ -238,5 +242,5 @@ class GridDecoration extends RecyclerView.ItemDecoration {
 }
 ```
 
-## GITHUB
+#### GITHUB
 https://github.com/chezi008/TimeAlbum
