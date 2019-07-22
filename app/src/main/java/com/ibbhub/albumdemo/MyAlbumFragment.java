@@ -32,6 +32,11 @@ public class MyAlbumFragment extends AlbumFragment {
     }
 
     @Override
+    public Boolean obtainFile(File file) {
+        return file.getName().endsWith(".mp4") || file.getName().endsWith(".jpg");
+    }
+
+    @Override
     public ITaDecoration buildDecoration() {
         return null;
     }

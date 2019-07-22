@@ -188,7 +188,7 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
                     @Override
                     public boolean test(File it) throws Exception {
 //                        Log.d(TAG, "test: "+it.getAbsolutePath());
-                        return it.getName().endsWith(".jpg") || it.getName().endsWith(".mp4");
+                        return obtainFile(it);
                     }
                 })
                 .map(new Function<File, AlbumBean>() {
@@ -361,7 +361,7 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
      * @return
      */
     public abstract List<File> buildAlbumSrc();
-
+    public abstract Boolean obtainFile(File file);
     /**
      * 设置recyclerView的装饰器
      *
@@ -377,7 +377,7 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
      * @param data 预览数据
      * @param pos  当前选择albumBean 的位置
      */
-    public void start2Preview(ArrayList<AlbumBean> data, int pos) {
+    protected void start2Preview(ArrayList<AlbumBean> data, int pos) {
         AlbumPreviewActivity.start(getContext(), data, pos);
     }
 
