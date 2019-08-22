@@ -36,7 +36,6 @@ dependencies {
 
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     //adapter dependence
-//    implementation 'com.hannesdorfmann:adapterdelegates3:3.0.1'
     implementation 'com.ibbhub.android:adapterdelegate:1.0.0'
     //retrofit2
     implementation 'com.squareup.retrofit2:retrofit:2.2.0'
@@ -44,8 +43,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
-    //eventbus
-    implementation "org.greenrobot:eventbus:3.1.1"
     //videoPlayer
     implementation 'com.ycjiang:VideoPlayModule:2.1.85'
     //photoView

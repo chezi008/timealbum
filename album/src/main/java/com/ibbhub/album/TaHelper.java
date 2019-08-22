@@ -15,7 +15,7 @@ import java.util.List;
 
     private List<File> srcFiles = new ArrayList<>();
     private TimeAlbumListener timeAlbumListener;
-    private AdapterListener<AlbumBean> adapterListener;
+    public AdapterListener<AlbumBean> adapterListener;
 
     private TaHelper() {
 
@@ -28,13 +28,7 @@ import java.util.List;
         return srcFiles;
     }
 
-    public void setAdapterListener(AdapterListener<AlbumBean> adapterListener) {
-        this.adapterListener = adapterListener;
-    }
 
-    public AdapterListener<AlbumBean> getAdapterListener() {
-        return adapterListener;
-    }
 
     private ITaDecoration decoration;
 

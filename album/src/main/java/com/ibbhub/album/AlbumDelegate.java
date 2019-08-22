@@ -22,7 +22,7 @@ class AlbumDelegate extends AbsFallbackAdapterDelegate<List<AlbumBean>> {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent) {
-        listener = TaHelper.getInstance().getAdapterListener();
+        listener = TaHelper.getInstance().adapterListener;
         return new AlbumDelegateHolder(new TaAlbumView(parent.getContext()));
     }
 

@@ -7,9 +7,11 @@ import android.view.View;
  * @description ：
  * @email ：chezi008@163.com
  */
- interface AdapterListener<T> {
+interface AdapterListener<T> {
 
     void onItemClick(T t, View v);
 
     void onItemLongClick(T t, View v);
+
+    void onAlubumDelete(T t);
 }

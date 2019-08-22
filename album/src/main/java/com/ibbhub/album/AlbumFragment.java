@@ -82,50 +82,7 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
     private void initVariable() {
         isChooseMode = false;
         TaShareManager.getInstance().setFileProviderName(fileProviderName());
-        TaHelper.getInstance().setAdapterListener(new AdapterListener<AlbumBean>() {
-            @Override
-            public void onItemClick(AlbumBean albumBean, View v) {
-                TimeBean timeBean = new TimeBean();
-                timeBean.setDate(albumBean.date);
-                if (isChooseMode) {
-                    int index = choosedCache.indexOf(timeBean);
-                    List<AlbumBean> mbList;
-                    if (index < 0) {
-                        //被选中
-                        mbList = new ArrayList<>();
-                        mbList.add(albumBean);
-                        timeBean.setItemList(mbList);
-                        choosedCache.add(timeBean);
-                    } else {
-                        mbList = choosedCache.get(index).itemList;
-
-                        //如果被选中，则添加到缓存中
-                        if (albumBean.isChecked) {
-                            mbList.add(albumBean);
-                        } else {
-                            mbList.remove(albumBean);
-                            if (mbList.size() == 0) {
-                                choosedCache.remove(index);
-                            }
-                        }
-//                        Log.d(TAG, "onItemClick: choosedCacheSize:"+mbList.size());
-                    }
-                } else {
-                    int index = mData.indexOf(timeBean);
-                    TimeBean ab = mData.get(index);
-                    index = ab.itemList.indexOf(albumBean);
-                    if (index >= 0) {
-                        start2Preview((ArrayList<AlbumBean>) ab.itemList, index);
-                    }
-                }
-            }
-
-            @Override
-            public void onItemLongClick(AlbumBean albumBean, View v) {
-                //进入选择模式
-                enterChoose();
-            }
-        });
+        TaHelper.getInstance().adapterListener = adapterListener;
         TaHelper.getInstance()
                 .setSrcFiles(buildAlbumSrc())
                 .setTbDecoration(buildDecoration())
@@ -327,7 +284,6 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
     }
 
 
-
     /**
      * 取消选择
      */
@@ -361,7 +317,9 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
      * @return
      */
     public abstract List<File> buildAlbumSrc();
+
     public abstract Boolean obtainFile(File file);
+
     /**
      * 设置recyclerView的装饰器
      *
@@ -381,8 +339,54 @@ public abstract class AlbumFragment extends Fragment implements TimeAlbumListene
         AlbumPreviewActivity.start(getContext(), data, pos);
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void processDeleteEvent(DeleteEvent event){
-        notifyAlbumRemove(event.albumBean);
-    }
+
+    private AdapterListener adapterListener = new AdapterListener<AlbumBean>() {
+        @Override
+        public void onItemClick(AlbumBean albumBean, View v) {
+            TimeBean timeBean = new TimeBean();
+            timeBean.setDate(albumBean.date);
+            if (isChooseMode) {
+                int index = choosedCache.indexOf(timeBean);
+                List<AlbumBean> mbList;
+                if (index < 0) {
+                    //被选中
+                    mbList = new ArrayList<>();
+                    mbList.add(albumBean);
+                    timeBean.setItemList(mbList);
+                    choosedCache.add(timeBean);
+                } else {
+                    mbList = choosedCache.get(index).itemList;
+
+                    //如果被选中，则添加到缓存中
+                    if (albumBean.isChecked) {
+                        mbList.add(albumBean);
+                    } else {
+                        mbList.remove(albumBean);
+                        if (mbList.size() == 0) {
+                            choosedCache.remove(index);
+                        }
+                    }
+//                        Log.d(TAG, "onItemClick: choosedCacheSize:"+mbList.size());
+                }
+            } else {
+                int index = mData.indexOf(timeBean);
+                TimeBean ab = mData.get(index);
+                index = ab.itemList.indexOf(albumBean);
+                if (index >= 0) {
+                    start2Preview((ArrayList<AlbumBean>) ab.itemList, index);
+                }
+            }
+        }
+
+        @Override
+        public void onItemLongClick(AlbumBean albumBean, View v) {
+            //进入选择模式
+            enterChoose();
+        }
+
+        @Override
+        public void onAlubumDelete(AlbumBean albumBean) {
+            notifyAlbumRemove(albumBean);
+        }
+    };
 }

@@ -84,13 +84,13 @@ public class AlbumPreviewFragment extends Fragment implements TaPagerHelper.Page
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                DeleteEvent event = new DeleteEvent();
-                event.albumBean = mData.get(position);
-                EventBus.getDefault().post(event);
-                if (mData.size()>1){
+                if (TaHelper.getInstance().adapterListener != null) {
+                    TaHelper.getInstance().adapterListener.onAlubumDelete(mData.get(position));
+                }
+                if (mData.size() > 1) {
                     mData.remove(position);
                     mAdappter.notifyItemRemoved(position);
-                }else {
+                } else {
                     getActivity().finish();
                 }
             }
