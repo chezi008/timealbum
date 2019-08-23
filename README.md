@@ -2,7 +2,7 @@
 
 该库是将本地的图片和视频资源进行按时间分类排序并进行展示的相册库。
 
-[![](https://jitpack.io/v/chezi008/TimeAlbum.svg)](https://jitpack.io/#chezi008/TimeAlbum)
+[![](https://jitpack.io/v/chezi008/timealbum.svg)](https://jitpack.io/#chezi008/timealbum)
 
 #### 功能说明
 1. 图片和视频资源根据日期排序显示。
@@ -59,7 +59,7 @@ repositories {
 ```
 Next add a dependency in the build.gradle file of your app module. The following will add a dependency to the full library:
 ```
-implementation 'com.github.chezi008:TimeAlbum:x.x.x'
+implementation 'com.github.chezi008:timealbum:Tag'
 ```
 maven
 ```
@@ -266,4 +266,4 @@ class GridDecoration extends RecyclerView.ItemDecoration {
 
 #### GITHUB
 
-https://github.com/chezi008/TimeAlbum
+https://github.com/chezi008/timealbum
