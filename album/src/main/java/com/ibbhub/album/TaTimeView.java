@@ -32,7 +32,8 @@ import java.util.List;
 
     private void initView() {
         setOrientation(VERTICAL);
-
+        int lPadding = TaDecoration.dip2px(getContext(),10);
+        int space = TaDecoration.dip2px(getContext(),5);
         decoration = TaHelper.getInstance().getDecoration();
         if (decoration == null) {
             decoration = new TaDecoration(getContext());
@@ -44,6 +45,7 @@ import java.util.List;
         RecyclerView rcView = new RecyclerView(getContext());
         params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
         params.weight = 1;
+        rcView.setPadding(space,0,space,0);
         addView(rcView, params);
 
         adapter = new AlbumAdapter(data);
@@ -51,7 +53,7 @@ import java.util.List;
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 4);
         rcView.setLayoutManager(gridLayoutManager);
         rcView.setAdapter(adapter);
-        rcView.addItemDecoration(new GridDecoration(4, 5, true));
+        rcView.addItemDecoration(new GridDecoration(4, space, true));
     }
 
     public void notify(TimeBean timeBean) {

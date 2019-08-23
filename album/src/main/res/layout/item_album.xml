@@ -8,15 +8,15 @@
         android:id="@+id/tv_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#DAEDF4"
+        android:background="#eeeeee"
         android:ellipsize="end"
-        android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="5dp"
-        android:text="2017-04-21"
-        android:textColor="#000000"
-        android:textSize="16sp" />
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="04-21"
+        android:textColor="#666666"
+        android:textSize="18sp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rc_list"
@@ -24,5 +24,7 @@
         android:layout_height="wrap_content"
         app:layoutManager="android.support.v7.widget.GridLayoutManager"
         app:layout_constraintTop_toBottomOf="@+id/tv_date"
-        app:spanCount="4"></android.support.v7.widget.RecyclerView>
+        app:spanCount="4"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"/>
 </android.support.constraint.ConstraintLayout>

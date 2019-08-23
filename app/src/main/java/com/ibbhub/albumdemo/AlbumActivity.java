@@ -8,15 +8,25 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.ibbhub.album.AlbumFragment;
 
 public class AlbumActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_album);
+        super.onCreate(savedInstanceState);
+        ImmersionBar.with(this).statusBarColor(R.color.colorPrimary)
+                .fitsSystemWindows(true)
+                .statusBarDarkFont(true, 0.2f)
+                .keyboardEnable(true) //解决软键盘与底部输入框冲突问题，默认为 false，还有一个重载方法，可以指定软键盘 mode
+                .keyboardMode(
+                        WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE |
+                                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+                ).init(); //单独指定软键盘模式
         initView();
     }
     private MenuItem chooseMenu;
@@ -59,5 +69,10 @@ public class AlbumActivity extends AppCompatActivity {
     public static void start(Context context) {
         Intent starter = new Intent(context, AlbumActivity.class);
         context.startActivity(starter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
  * @description ：The decoration of timeAlbum
  * @email ：chezi008@163.com
  */
- class TaDecoration implements ITaDecoration {
+class TaDecoration implements ITaDecoration {
 
     private TextView mTvDate, mTvNum;
     private LinearLayout llParent;
@@ -33,14 +33,17 @@ import java.text.SimpleDateFormat;
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.leftMargin = tPadding;
-        llParent.addView(mTvDate);
+        params.weight = 1;
+        llParent.addView(mTvDate, params);
+        params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.rightMargin = lPadding;
         llParent.addView(mTvNum, params);
 
-        llParent.setBackgroundColor(Color.parseColor("#DAEDF4"));
+        llParent.setBackgroundColor(Color.parseColor("#eeeeee"));
     }
 
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("MM月dd日");
 
     @Override
     public void showDate(long date) {
@@ -50,7 +53,7 @@ import java.text.SimpleDateFormat;
 
     @Override
     public void showNum(int num) {
-        String sNum = num > 0 ? String.format("(%d)", num) : "";
+        String sNum = num > 0 ? String.format("%d", num) : "";
         mTvNum.setText(sNum);
     }
 
