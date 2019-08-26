@@ -24,8 +24,6 @@ public class MyAlbumFragment extends AlbumFragment {
     public List<File> buildAlbumSrc() {
         String path = Environment.getExternalStorageDirectory().getAbsolutePath()
                 + "/DCIM/Camera";
-//        String path = Environment.getExternalStorageDirectory().getAbsolutePath()
-//                + "/GySoldier/430001/videoRecord";
         List<File> fileList = new ArrayList<>();
         fileList.add(new File(path));
         return fileList;
@@ -43,7 +41,7 @@ public class MyAlbumFragment extends AlbumFragment {
 
     @Override
     public String fileProviderName() {
-        return BuildConfig.APPLICATION_ID+".provider";
+        return BuildConfig.APPLICATION_ID+".album.provider";
     }
 
     @Override

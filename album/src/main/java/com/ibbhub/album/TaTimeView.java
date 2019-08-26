@@ -1,6 +1,7 @@
 package com.ibbhub.album;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -46,6 +47,7 @@ import java.util.List;
         params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
         params.weight = 1;
         rcView.setPadding(space,0,space,0);
+        rcView.setBackgroundColor(Color.WHITE);
         addView(rcView, params);
 
         adapter = new AlbumAdapter(data);
