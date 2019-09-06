@@ -36,7 +36,7 @@ dependencies {
 
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     //adapter dependence
-    implementation 'com.ibbhub.android:adapterdelegate:1.0.0'
+    implementation 'com.github.chezi008:adapter-delegate:1.0.3'
     //retrofit2
     implementation 'com.squareup.retrofit2:retrofit:2.2.0'
     //RxJava2 请求结果适配器
